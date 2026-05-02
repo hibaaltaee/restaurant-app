@@ -8,7 +8,7 @@ const db = require('./db')
 
 const app = express()
 
-// cors
+// CORS config
 app.use(cors({
     origin: [
         'http://localhost:5173',
@@ -26,13 +26,17 @@ app.use('/api/categories', require('./routes/categoryRoutes'))
 app.use('/api/orders', require('./routes/orderRoutes'))
 app.use('/api/staff', require('./routes/staffRoutes'))
 
-// Test route
 app.get('/', (req, res) => {
     res.json({ message: 'Restaurant API is running! 🍕' })
 })
 
-// Start server
-const PORT = process.env.PORT || 5000
-app.listen(PORT, () => {
-    console.log(`✅ Server running on port ${PORT}`)
-})
+// Export for serverless
+module.exports = app
+
+// Start server locally
+if (require.main === module) {
+    const PORT = process.env.PORT || 5000
+    app.listen(PORT, () => {
+        console.log(`✅ Server running on port ${PORT}`)
+    })
+}
