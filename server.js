@@ -24,6 +24,7 @@ app.use('/api/auth', require('./routes/authRoutes'))
 app.use('/api/menu', require('./routes/menuRoutes'))
 app.use('/api/categories', require('./routes/categoryRoutes'))
 app.use('/api/orders', require('./routes/orderRoutes'))
+app.use('/api/staff', require('./routes/staffRoutes'))
 
 // Test route
 app.get('/', (req, res) => {
