@@ -8,8 +8,15 @@ const db = require('./db')
 
 const app = express()
 
-// Middleware
-app.use(cors())
+// cors
+app.use(cors({
+    origin: [
+        'http://localhost:5173',
+        process.env.FRONTEND_URL
+    ],
+    credentials: true
+}))
+
 app.use(express.json())
 
 // Routes
