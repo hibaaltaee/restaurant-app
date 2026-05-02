@@ -14,7 +14,13 @@ const deleteMenuItem = async (req, res) => {
             return res.status(404).json({ message: 'Menu item not found' })
         }
 
-        // Delete menu item
+        // Delete related order items first
+        await pool.query(
+            'DELETE FROM order_items WHERE menu_item_id = $1',
+            [id]
+        )
+
+        // Then delete the menu item
         await pool.query(
             'DELETE FROM menu_items WHERE id = $1',
             [id]
